@@ -14,8 +14,10 @@ To run the server.
 # Example URLs:
 List of Starships for Luke Skywalker:
 ```http://localhost:8000/api/starships?person=Luke%20Skywalker```
+
 Species Classification in Episode I:
 ```http://localhost:8000/api/species?episode=1```
+
 Total Population of Planets in the Galaxy:
 ```http://localhost:8000/api/planets/population```
 
