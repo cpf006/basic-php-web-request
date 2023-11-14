@@ -27,10 +27,10 @@ Run tests:
 
 # Documentation
 ### Get Starships for a Character
-Endpoint: /api/starships
-Method: GET
-Parameter: person - The name of the character (e.g., "Luke Skywalker")
-Example Request: GET /api/starships?person=Luke%20Skywalker
+Endpoint: /api/starships<br>
+Method: GET<br>
+Parameter: person - The name of the character (e.g., "Luke Skywalker")<br>
+Example Request: GET /api/starships?person=Luke%20Skywalker<br>
 Example Response:
 ```
 [
@@ -49,10 +49,10 @@ Example Response:
 ```
 
 ### Get Species Classification by Episode
-Endpoint: /api/species
-Method: GET
-Parameter: episode - The episode number (e.g., 1 for the first episode)
-Example Request: GET /api/species?episode=1
+Endpoint: /api/species<br>
+Method: GET<br>
+Parameter: episode - The episode number (e.g., 1 for the first episode)<br>
+Example Request: GET /api/species?episode=1<br>
 Example Response:
 ```
 [
@@ -63,10 +63,10 @@ Example Response:
 ```
 
 ### Get Total Population of All Planets
-Endpoint: /api/planets/population
-Method: GET
-No Parameters
-Example Request: GET /api/planets/population
+Endpoint: /api/planets/population<br>
+Method: GET<br>
+No Parameters<br>
+Example Request: GET /api/planets/population<br>
 Example Response:
 ```
 {
