@@ -12,7 +12,7 @@ return function ($app) {
         // Route for species, accepts an 'episode' query parameter
         $group->get('/species', [SpeciesController::class, 'getSpeciesByEpisode']);
 
-        // Existing route for planets
+        // Route for planet population
         $group->get('/planets/population', [PlanetController::class, 'getTotalPopulation']);
     });
 };

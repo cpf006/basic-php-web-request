@@ -19,13 +19,8 @@ class PlanetControllerTest extends TestCase
 
     protected function setUp(): void
     {
-        // Create mock client
-        $mock = new MockHandler([]);
-        $handlerStack = HandlerStack::create($mock);
-        $this->client = new Client(['handler' => $handlerStack]);
-        $this->request = (new ServerRequestFactory)->createServerRequest('GET', '/');
-        $this->response = (new ResponseFactory)->createResponse();
-        $this->controller = new PlanetController($this->client);
+        $this->request = (new ServerRequestFactory())->createServerRequest('GET', '/');
+        $this->response = (new ResponseFactory())->createResponse();
     }
 
     public function testGetTotalPopulationSuccess()
@@ -43,8 +38,6 @@ class PlanetControllerTest extends TestCase
         $mock = new MockHandler([$mockResponse]);
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
-
-        // Inject the mocked client into the controller
         $this->controller = new PlanetController($client);
         $response = $this->controller->getTotalPopulation($this->request, $this->response, []);
     

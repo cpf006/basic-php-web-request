@@ -22,7 +22,7 @@ class SpeciesController {
     public function getSpeciesByEpisode(Request $request, Response $response, $args): Response {
         $episodeId = $request->getQueryParams()['episode'] ?? '';
 
-        // Get Episode 
+        // Get episode 
         try {
             $filmResponse = $this->client->get("https://swapi.dev/api/films/$episodeId");
             $filmData = json_decode($filmResponse->getBody(), true);
@@ -33,7 +33,7 @@ class SpeciesController {
             return $this->errorResponse("Error retrieving episode data");
         }
 
-        // Get Species
+        // Get species
         try {
             $promises = [];
             foreach ($filmData['species'] as $speciesUrl) {

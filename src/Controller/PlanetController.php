@@ -15,9 +15,11 @@ class PlanetController {
 
     public function getTotalPopulation(Request $request, Response $response, $args): Response {
         try {
+            // Get planet
             $planetsResponse = $this->client->get("https://swapi.dev/api/planets/");
             $planetsData = json_decode($planetsResponse->getBody(), true);
 
+            // Calculate population
             $totalPopulation = 0;
             foreach ($planetsData['results'] as $planet) {
                 $population = $planet['population'] === 'unknown' ? 0 : (int)$planet['population'];

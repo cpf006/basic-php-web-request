@@ -17,19 +17,23 @@ class StarshipController {
     public function getStarshipsByPerson(Request $request, Response $response, $args): Response {
         $personName = $request->getQueryParams()['person'] ?? '';
         try {
+            // Get character 
             $peopleResponse = $this->client->get("https://swapi.dev/api/people/?search=$personName");
             $peopleData = json_decode($peopleResponse->getBody(), true);
 
+            // Handle case where character not found
             if ($peopleData['count'] == 0) {
                 $response->getBody()->write(json_encode(["detail" => "Character not found"]));
                 return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
             }
 
+            // Get starships 
             $promises = [];
             foreach ($peopleData['results'][0]['starships'] as $starshipUrl) {
                 $promises[] = $this->client->getAsync($starshipUrl);
             }
 
+            // Add starships to response 
             $results = Promise\Utils::unwrap($promises);
             $starships = array_map(function ($result) {
                 return json_decode($result->getBody(), true);

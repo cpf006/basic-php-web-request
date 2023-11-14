@@ -41,7 +41,6 @@ class CacheMiddlewareTest extends TestCase
         $handler = $this->createMock(RequestHandlerInterface::class);
         $handler->method('handle')->willReturn($response);
 
-        // Test the middleware
         $middleware = new CacheMiddleware();
         $processedResponse = $middleware->process($request, $handler);
 
@@ -52,30 +51,23 @@ class CacheMiddlewareTest extends TestCase
 
     public function testProcessWithCacheHit()
     {
+        // Mock request
         $uri = '/test-uri';
         $expectedResponseData = [
             'statusCode' => 200,
             'headers' => ['Content-Type' => ['application/json']],
             'body' => '{"message":"Cached response"}'
         ];
-    
-        // Create a mock request with a specific URI
         $request = $this->mockRequestWithUri($uri);
     
         // Mock the FilesystemAdapter to return the expected array structure
         $cache = $this->createMock(FilesystemAdapter::class);
         $cache->method('get')->willReturn($expectedResponseData);
-    
-        // Inject the mock cache into the middleware
         $middleware = new CacheMiddleware($cache);
-    
-        // Mock the handler (should not be called in cache hit scenario)
         $handler = $this->createMock(RequestHandlerInterface::class);
-    
-        // Test the middleware
         $processedResponse = $middleware->process($request, $handler);
     
-        // Assertions
+        // Assert response matches cached version 
         $this->assertEquals($expectedResponseData['statusCode'], $processedResponse->getStatusCode());
         $this->assertEquals($expectedResponseData['headers'], $processedResponse->getHeaders());
         $this->assertEquals($expectedResponseData['body'], (string) $processedResponse->getBody());

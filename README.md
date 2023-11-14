@@ -23,3 +23,56 @@ Total Population of Planets in the Galaxy:
 Run tests:
 ```./vendor/bin/phpunit```
 
+# Documentation
+### Get Starships for a Character
+Endpoint: /api/starships
+Method: GET
+Parameter: person - The name of the character (e.g., "Luke Skywalker")
+Example Request: GET /api/starships?person=Luke%20Skywalker
+Example Response:
+```
+[
+  {
+    "name": "X-wing",
+    "model": "T-65 X-wing",
+    "manufacturer": "Incom Corporation",
+    "cost_in_credits": "149999",
+    "length": "12.5",
+    "max_atmosphering_speed": "1050",
+    "crew": "1",
+    "passengers": "0",
+    ...
+  }
+]
+```
+
+### Get Species Classification by Episode
+Endpoint: /api/species
+Method: GET
+Parameter: episode - The episode number (e.g., 1 for the first episode)
+Example Request: GET /api/species?episode=1
+Example Response:
+```
+[
+  "mammal",
+  "artificial",
+  "sentient"
+]
+```
+
+### Get Total Population of All Planets
+Endpoint: /api/planets/population
+Method: GET
+No Parameters
+Example Request: GET /api/planets/population
+Example Response:
+```
+{
+  "totalPopulation": "100000000000"
+}
+```
+
+
+
+
+

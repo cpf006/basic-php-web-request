@@ -32,12 +32,10 @@ class SpeciesControllerTest extends TestCase
         // Create request and response
         $request = (new ServerRequestFactory())->createServerRequest('GET', '/?episode=1');
         $response = (new ResponseFactory())->createResponse();
-
-        // Inject the mocked client into the controller
         $controller = new SpeciesController($client);
         $response = $controller->getSpeciesByEpisode($request, $response, []);
 
-        // Assertions
+        // Assert classification list is returned with no duplicates
         $this->assertEquals(200, $response->getStatusCode());
         $responseData = json_decode((string)$response->getBody(), true);
         $this->assertEquals(['mammal'], $responseData);
@@ -56,16 +54,12 @@ class SpeciesControllerTest extends TestCase
         // Create request and response
         $request = (new ServerRequestFactory())->createServerRequest('GET', '/?episode=invalid');
         $response = (new ResponseFactory())->createResponse();
-
-        // Inject the mocked client into the controller
         $controller = new SpeciesController($client);
         $response = $controller->getSpeciesByEpisode($request, $response, []);
 
-        // Assertions
+        // Assert 404 is returned with proper error message
         $this->assertEquals(404, $response->getStatusCode());
         $responseData = json_decode((string)$response->getBody(), true);
         $this->assertEquals(["error" => "Episode not found"], $responseData);
     }
-
-    // Additional test methods can be added here
 }
