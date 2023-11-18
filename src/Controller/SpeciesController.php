@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use Psr\Http\Message\ResponseInterface as Response;
@@ -7,22 +8,26 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Promise;
 use GuzzleHttp\Exception\ClientException;
 
-class SpeciesController {
+class SpeciesController
+{
     private $client;
 
-    public function __construct(Client $client = null) {
+    public function __construct(Client $client = null)
+    {
         $this->client = $client ?? new Client();
     }
 
-    private function errorResponse(String $error) {
+    private function errorResponse(string $error)
+    {
         $response->getBody()->write(json_encode(["error" => $error]));
         return $response->withStatus(500)->withHeader('Content-Type', 'application/json');
     }
 
-    public function getSpeciesByEpisode(Request $request, Response $response, $args): Response {
+    public function getSpeciesByEpisode(Request $request, Response $response, $args): Response
+    {
         $episodeId = $request->getQueryParams()['episode'] ?? '';
 
-        // Get episode 
+        // Get episode
         try {
             $filmResponse = $this->client->get("https://swapi.dev/api/films/$episodeId");
             $filmData = json_decode($filmResponse->getBody(), true);

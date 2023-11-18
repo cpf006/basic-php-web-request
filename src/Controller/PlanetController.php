@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use Psr\Http\Message\ResponseInterface as Response;
@@ -6,14 +7,17 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
-class PlanetController {
+class PlanetController
+{
     private $client;
 
-    public function __construct(Client $client = null) {
+    public function __construct(Client $client = null)
+    {
         $this->client = $client ?? new Client();
     }
 
-    public function getTotalPopulation(Request $request, Response $response, $args): Response {
+    public function getTotalPopulation(Request $request, Response $response, $args): Response
+    {
         try {
             // Get planet
             $planetsResponse = $this->client->get("https://swapi.dev/api/planets/");

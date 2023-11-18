@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Middleware;
 
 use Psr\Http\Message\ResponseInterface;
@@ -32,7 +33,7 @@ class CacheMiddleware implements MiddlewareInterface
         $cachedData = $this->cache->get($cacheKey, function (ItemInterface $item) use ($handler, $request) {
             $item->expiresAfter(3600); // Cache expiration time in seconds
             $response = $handler->handle($request);
-            
+
             // Store only necessary parts of the response
             return [
                 'statusCode' => $response->getStatusCode(),
@@ -52,7 +53,7 @@ class CacheMiddleware implements MiddlewareInterface
         }
 
         $response->getBody()->write($cachedData['body']);
-        
+
         return $response;
     }
 }

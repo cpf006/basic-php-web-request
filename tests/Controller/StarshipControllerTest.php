@@ -23,10 +23,11 @@ class StarshipControllerTest extends TestCase
         $this->response = (new ResponseFactory())->createResponse();
     }
 
-    public function testFetchingStarshipsForValidCharacter() {
+    public function testFetchingStarshipsForValidCharacter()
+    {
         $peopleResponse = new GuzzleResponse(200, [], json_encode([
-            "count" => 1, 
-            "results" => [[ 
+            "count" => 1,
+            "results" => [[
                 "name" => "Luke Skywalker",
                 "starships" => ["https://swapi.dev/api/starships/12/"]
             ]]
@@ -61,7 +62,7 @@ class StarshipControllerTest extends TestCase
     public function testFetchingStarshipsForInvalidCharacter()
     {
         $notFoundResponse = new GuzzleResponse(200, [], json_encode([
-            "count" => 0, 
+            "count" => 0,
             "results" => []
         ]));
 

@@ -59,17 +59,17 @@ class CacheMiddlewareTest extends TestCase
             'body' => '{"message":"Cached response"}'
         ];
         $request = $this->mockRequestWithUri($uri);
-    
+
         // Mock the FilesystemAdapter to return the expected array structure
         $cache = $this->createMock(FilesystemAdapter::class);
         $cache->method('get')->willReturn($expectedResponseData);
         $middleware = new CacheMiddleware($cache);
         $handler = $this->createMock(RequestHandlerInterface::class);
         $processedResponse = $middleware->process($request, $handler);
-    
-        // Assert response matches cached version 
+
+        // Assert response matches cached version
         $this->assertEquals($expectedResponseData['statusCode'], $processedResponse->getStatusCode());
         $this->assertEquals($expectedResponseData['headers'], $processedResponse->getHeaders());
         $this->assertEquals($expectedResponseData['body'], (string) $processedResponse->getBody());
-    }    
+    }
 }
