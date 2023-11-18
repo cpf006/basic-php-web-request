@@ -20,7 +20,9 @@ class SpeciesControllerTest extends TestCase
     public function testGetSpeciesByEpisodeSuccess()
     {
         // Mock responses for the film and species data
-        $filmResponse = new GuzzleResponse(200, [], json_encode(["species" => ["https://swapi.dev/api/species/1/", "https://swapi.dev/api/species/2/"]]));
+        $filmResponse = new GuzzleResponse(200, [], json_encode([
+            "species" => ["https://swapi.dev/api/species/1/", "https://swapi.dev/api/species/2/"]
+        ]));
         $speciesResponse = new GuzzleResponse(200, [], json_encode(["classification" => "mammal"]));
         $speciesTwoResponse = new GuzzleResponse(200, [], json_encode(["classification" => "mammal"]));
 
